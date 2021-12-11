@@ -1,1 +1,1 @@
-# pytorch-LR-snake
+# pytorch-RL-snake
