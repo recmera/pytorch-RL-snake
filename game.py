@@ -1,5 +1,4 @@
 import pygame
-import os
 import random
 from enum import Enum
 from collections import namedtuple
@@ -7,12 +6,6 @@ import numpy as np
 
 pygame.init()
 font = pygame.font.Font('times.ttf', 25) #this way is more faster for pygame
-
-# Reset
-# Reward
-# play(action) -> direction
-# game_iteration
-# iscollision
 
 
 class Direction(Enum):

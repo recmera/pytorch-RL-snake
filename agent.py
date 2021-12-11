@@ -15,7 +15,7 @@ class Agent:
     def __init__(self):
         self.n_games = 0
         self.epsilon = 0 # Parameter for randomness
-        self.gamma = 0 # Discount rate
+        self.gamma = 0.9 # Discount rate
         self.memory = deque(maxlen=MAX_MEMORY) # popleft()
         self.model = Linear_QNet(11, 256, 3) # 11 initial states, 256 hidden states, 3 return states
         self.trainer = QTrainer(self.model, lr = LR, gamma = self.gamma)
@@ -87,7 +87,7 @@ class Agent:
     
     def get_action(self, state):
         # Random moves -> tradeoff exploration / explotation
-        self.epsilon = 800 - self.n_games
+        self.epsilon = 80 - self.n_games
         final_move = [0,0,0]
         if random.randint(0,200) < self.epsilon:
             move = random.randint(0, 2)
@@ -109,6 +109,7 @@ def train():
     record = 0
     agent = Agent()
     game = SnakeGameAI()
+
     while True:
         # Get old state
         state_old = agent.get_state(game)
@@ -136,7 +137,7 @@ def train():
                 record = score
                 agent.model.save()
 
-            print("Game", agent.n_games, "Score", score, "Record", record)
+            print(" Game:", agent.n_games, " Score:", score, " Record:", record)
             
             plot_scores.append(score)
             total_score += score
